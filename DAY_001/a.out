@@ -1,0 +1,98 @@
+#! /usr/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/system.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
+:vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
+S_0x65139448ea80 .scope module, "basic_gate_tb" "basic_gate_tb" 2 1;
+ .timescale 0 0;
+v0x6513944b6d90_0 .var "A", 0 0;
+v0x6513944b6e50_0 .net "AandB", 0 0, L_0x65139448dbd0;  1 drivers
+v0x6513944b6ef0_0 .net "AexnorB", 0 0, L_0x6513944b7b80;  1 drivers
+v0x6513944b6f90_0 .net "AexorB", 0 0, L_0x6513944b7ce0;  1 drivers
+v0x6513944b7030_0 .net "AnandB", 0 0, L_0x6513944b78b0;  1 drivers
+v0x6513944b70d0_0 .net "AnorB", 0 0, L_0x6513944b79c0;  1 drivers
+v0x6513944b71a0_0 .net "AorB", 0 0, L_0x65139448db60;  1 drivers
+v0x6513944b7270_0 .var "B", 0 0;
+v0x6513944b7340_0 .net "notA", 0 0, L_0x6513944b74e0;  1 drivers
+v0x6513944b7410_0 .net "notB", 0 0, L_0x6513944b75d0;  1 drivers
+S_0x651394463490 .scope module, "dut" "basic_gates" 2 5, 3 1 0, S_0x65139448ea80;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 1 "AandB";
+    .port_info 1 /OUTPUT 1 "AorB";
+    .port_info 2 /OUTPUT 1 "notA";
+    .port_info 3 /OUTPUT 1 "notB";
+    .port_info 4 /OUTPUT 1 "AexorB";
+    .port_info 5 /OUTPUT 1 "AexnorB";
+    .port_info 6 /OUTPUT 1 "AnorB";
+    .port_info 7 /OUTPUT 1 "AnandB";
+    .port_info 8 /INPUT 1 "A";
+    .port_info 9 /INPUT 1 "B";
+L_0x65139448db60 .functor OR 1, v0x6513944b6d90_0, v0x6513944b7270_0, C4<0>, C4<0>;
+L_0x65139448dbd0 .functor AND 1, v0x6513944b6d90_0, v0x6513944b7270_0, C4<1>, C4<1>;
+L_0x6513944b7840 .functor AND 1, v0x6513944b6d90_0, v0x6513944b7270_0, C4<1>, C4<1>;
+L_0x6513944b78b0 .functor NOT 1, L_0x6513944b7840, C4<0>, C4<0>, C4<0>;
+L_0x6513944b7950 .functor OR 1, v0x6513944b6d90_0, v0x6513944b7270_0, C4<0>, C4<0>;
+L_0x6513944b79c0 .functor NOT 1, L_0x6513944b7950, C4<0>, C4<0>, C4<0>;
+L_0x6513944b7b10 .functor XOR 1, v0x6513944b6d90_0, v0x6513944b7270_0, C4<0>, C4<0>;
+L_0x6513944b7b80 .functor NOT 1, L_0x6513944b7b10, C4<0>, C4<0>, C4<0>;
+L_0x6513944b7ce0 .functor XOR 1, v0x6513944b6d90_0, v0x6513944b7270_0, C4<0>, C4<0>;
+v0x651394463770_0 .net "A", 0 0, v0x6513944b6d90_0;  1 drivers
+v0x6513944b6260_0 .net "AandB", 0 0, L_0x65139448dbd0;  alias, 1 drivers
+v0x6513944b6320_0 .net "AexnorB", 0 0, L_0x6513944b7b80;  alias, 1 drivers
+v0x6513944b63c0_0 .net "AexorB", 0 0, L_0x6513944b7ce0;  alias, 1 drivers
+v0x6513944b6480_0 .net "AnandB", 0 0, L_0x6513944b78b0;  alias, 1 drivers
+v0x6513944b6590_0 .net "AnorB", 0 0, L_0x6513944b79c0;  alias, 1 drivers
+v0x6513944b6650_0 .net "AorB", 0 0, L_0x65139448db60;  alias, 1 drivers
+v0x6513944b6710_0 .net "B", 0 0, v0x6513944b7270_0;  1 drivers
+v0x6513944b67d0_0 .net *"_ivl_12", 0 0, L_0x6513944b7950;  1 drivers
+v0x6513944b68b0_0 .net *"_ivl_16", 0 0, L_0x6513944b7b10;  1 drivers
+v0x6513944b6990_0 .net *"_ivl_8", 0 0, L_0x6513944b7840;  1 drivers
+v0x6513944b6a70_0 .net "notA", 0 0, L_0x6513944b74e0;  alias, 1 drivers
+v0x6513944b6b30_0 .net "notB", 0 0, L_0x6513944b75d0;  alias, 1 drivers
+L_0x6513944b74e0 .reduce/nor v0x6513944b6d90_0;
+L_0x6513944b75d0 .reduce/nor v0x6513944b7270_0;
+    .scope S_0x65139448ea80;
+T_0 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6513944b6d90_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6513944b7270_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6513944b6d90_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6513944b7270_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6513944b6d90_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6513944b7270_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6513944b6d90_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6513944b7270_0, 0, 1;
+    %delay 10, 0;
+    %end;
+    .thread T_0;
+    .scope S_0x65139448ea80;
+T_1 ;
+    %vpi_call 2 15 "$monitor", "A = %0d , B = %0d , AandB = %0d , AorB = %0d , notA = %0d , notB = %0d , AexorB = %0d , Aexnor = %0d , AnorB = %0d , AnandB = %0d ", v0x6513944b6d90_0, v0x6513944b7270_0, v0x6513944b6e50_0, v0x6513944b71a0_0, v0x6513944b7340_0, v0x6513944b7410_0, v0x6513944b6f90_0, v0x6513944b6ef0_0, v0x6513944b70d0_0, v0x6513944b7030_0 {0 0 0};
+    %end;
+    .thread T_1;
+    .scope S_0x65139448ea80;
+T_2 ;
+    %vpi_call 2 19 "$dumpfile", "Basic_Gates.vcd" {0 0 0};
+    %vpi_call 2 20 "$dumpvars" {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "basic_gate_tb.v";
+    "basic_gates.v";
