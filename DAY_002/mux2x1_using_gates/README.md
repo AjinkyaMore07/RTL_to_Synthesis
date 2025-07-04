@@ -53,4 +53,51 @@ Types of Multiplexers
 
 
 
-  
+# Yosys and Sky130 PDKs
+
+1] Read Verilog file 
+2] Read Liberty file 
+3] check Hierarchy
+
+  ![verilog+liberty+hierarchy](https://github.com/user-attachments/assets/30915068-64de-444c-b792-6c9bc535eac1)
+
+    
+4] 4] show -
+            
+            Create a graphviz DOT file for the selected part of the design and compile it to a graphics file (usually SVG or PostScript).
+
+            Before proc
+  ![before_proc yosys_show](https://github.com/user-attachments/assets/68b9050f-832e-401a-8653-aa9b9831a1d6)
+
+    
+5] proc - 
+            
+            The command proc converts processes (Yosys’ internal repre- sentation of Verilog always- and initial-blocks) to circuits of multiplexers and storage elements (various types of flip-flops).
+    
+  ![proc](https://github.com/user-attachments/assets/85c5d1aa-de9f-4e8e-809f-1df50b140c10)
+
+
+6] techmap -
+
+            This pass implements a very simple technology mapper that replaces cells in the design with implementations given in form of a Verilog or RTLIL source file.
+
+  ![techmap](https://github.com/user-attachments/assets/c7e4d4ab-d422-42e1-876a-6e5e3741333e)
+
+7] opt - 
+
+            This pass calls all the other opt_* passes in a useful order. This performs a series of trivial optimizations and cleanups. This pass executes the other passes in the following order:
+
+  ![optimization_mux2x2](https://github.com/user-attachments/assets/33adfb08-4254-4601-86b5-49da99730063)
+     
+8]  abc -liberty /home/ajinkya/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+
+            This pass uses the ABC tool [1] for technology mapping of yosys’s internal gate library to a target architecture.
+
+  ![abc_liberty yosys_show](https://github.com/user-attachments/assets/021c52b9-76bc-4f28-b104-bc115a51ed59)
+
+9] opt 
+
+  ![abc_liberty_optimized yosys_show](https://github.com/user-attachments/assets/a7dab2fa-cbb6-42d8-8318-b29f682df051)
+
+
+    
