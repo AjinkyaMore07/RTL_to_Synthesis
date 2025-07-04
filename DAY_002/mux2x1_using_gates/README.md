@@ -99,5 +99,9 @@ Types of Multiplexers
 
   ![abc_liberty_optimized yosys_show](https://github.com/user-attachments/assets/a7dab2fa-cbb6-42d8-8318-b29f682df051)
 
+10] write_verilog -attr2comment  mux2x1_netlist.v
+
+  ![netlist](https://github.com/user-attachments/assets/c981de8a-2577-4fc1-a7c7-1fab6192c541)
+
 
     
