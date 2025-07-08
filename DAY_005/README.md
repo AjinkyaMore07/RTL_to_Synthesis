@@ -1,14 +1,14 @@
-# Parallel Adder in Verilog
+# Ripple Carry Adder in Verilog
 
 ## Overview
 
-The `parallel_adder` module performs the addition of two 4-bit binary numbers with an additional carry-in. It outputs a 4-bit sum and a carry-out.
+The `ripple_carry_Adder` module adds two 4-bit binary numbers along with a carry-in bit and outputs a 4-bit sum and a carry-out bit. The carry-out of each Full Adder is passed to the next Full Adder, creating a ripple effect.
 
 ## Files
 
-- `Fa.v`: Verilog module for the Full Adder used in the Parallel Adder.
-- `parallel_adder.v`: Verilog module for the Parallel Adder.
-- `tb_parallel_adder.v`: Testbench for the Parallel Adder module.
+- `Fa.v`: Verilog module for the Full Adder used in the Ripple Carry Adder.
+- `ripple_carry_Adder.v`: Verilog module for the Ripple Carry Adder.
+- `tb_ripple_carry_Adder.v`: Testbench for the Ripple Carry Adder module.
 
 ## Module Description
 
@@ -27,9 +27,9 @@ The `parallel_adder` module performs the addition of two 4-bit binary numbers wi
 
 #### Functionality
 
-The Full Adder calculates the sum and carry-out for three single-bit binary inputs using XOR, AND, and OR operations.
+The Full Adder computes the sum and carry-out of three single-bit binary inputs using XOR, AND, and OR operations.
 
-### Parallel Adder (`parallel_adder`)
+### Ripple Carry Adder (`ripple_carry_Adder`)
 
 #### Ports
 
@@ -44,35 +44,59 @@ The Full Adder calculates the sum and carry-out for three single-bit binary inpu
 
 #### Functionality
 
-The Parallel Adder uses four Full Adders in series to compute the sum and carry-out of two 4-bit binary numbers. The carry-out of each Full Adder is passed to the next Full Adder as its carry-in.
+The Ripple Carry Adder uses four Full Adders connected in series to perform the addition of two 4-bit binary numbers. The carry-out from each Full Adder is fed into the next Full Adder as its carry-in.
 
 ## Testbench Description
 
-The testbench (`tb_parallel_adder`) applies various input combinations to the `parallel_adder` module and displays the results. It covers different cases to verify the correctness of the addition.
+The testbench (`tb_ripple_carry_Adder`) applies various input combinations to the `ripple_carry_Adder` module and displays the results. It verifies the correctness of the adder by covering different input scenarios.
 
 ### Test Cases
 
 1. **Inputs**: `a_in = 0000`, `b_in = 0000`, `c_in = 0`  
    **Outputs**: `sum = 0000`, `carry = 0`
 
-2. **Inputs**: `a_in = 0001`, `b_in = 0001`, `c_in = 0`  
-   **Outputs**: `sum = 0010`, `carry = 0`
+2. **Inputs**: `a_in = 0101`, `b_in = 0011`, `c_in = 0`  
+   **Outputs**: `sum = 1000`, `carry = 0`
 
-3. **Inputs**: `a_in = 0011`, `b_in = 0011`, `c_in = 0`  
-   **Outputs**: `sum = 0110`, `carry = 0`
+3. **Inputs**: `a_in = 1100`, `b_in = 1010`, `c_in = 0`  
+   **Outputs**: `sum = 0110`, `carry = 1`
 
-4. **Inputs**: `a_in = 0111`, `b_in = 0111`, `c_in = 0`  
-   **Outputs**: `sum = 1110`, `carry = 0`
+4. **Inputs**: `a_in = 0111`, `b_in = 1001`, `c_in = 1`  
+   **Outputs**: `sum = 0001`, `carry = 1`
 
-5. **Inputs**: `a_in = 1111`, `b_in = 1111`, `c_in = 0`  
+5. **Inputs**: `a_in = 1110`, `b_in = 1111`, `c_in = 1`  
    **Outputs**: `sum = 1110`, `carry = 1`
 
-6. **Inputs**: `a_in = 0101`, `b_in = 1010`, `c_in = 1`  
-   **Outputs**: `sum = 1111`, `carry = 0`
+6. **Inputs**: `a_in = 0010`, `b_in = 0101`, `c_in = 0`  
+   **Outputs**: `sum = 0111`, `carry = 0`
 
-7. **Inputs**: `a_in = 1110`, `b_in = 0001`, `c_in = 1`  
-   **Outputs**: `sum = 0000`, `carry = 1`
+7. **Inputs**: `a_in = 1011`, `b_in = 1101`, `c_in = 0`  
+   **Outputs**: `sum = 1000`, `carry = 1`
 
-8. **Inputs**: `a_in = 1010`, `b_in = 0101`, `c_in = 1`  
-   **Outputs**: `sum = 0000`, `carry = 1`
+8. **Inputs**: `a_in = 1111`, `b_in = 0001`, `c_in = 1`  
+   **Outputs**: `sum = 0001`, `carry = 1`
+
 ---
+
+a_in   b_in   c_in | sum    carry
+
+------------------------------
+
+0000   0000   0   | 0000  0
+
+0101   0011   0   | 1000  0
+
+1100   1010   0   | 0110  1
+
+0111   1001   1   | 0001  1
+
+1110   1111   1   | 1110  1
+
+0010   0101   0   | 0111  0
+
+1011   1101   0   | 1000  1
+
+1111   0001   1   | 0001  1
+
+---
+
