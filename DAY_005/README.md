@@ -100,3 +100,93 @@ a_in   b_in   c_in | sum    carry
 
 ---
 
+# VCD_OUTPUT
+
+![vcd_output](https://github.com/user-attachments/assets/3af15fa8-efb9-45d1-894d-fef2a48dc6a4)
+
+# GTKWAVE OUTPUT
+
+![gtkwave_output](https://github.com/user-attachments/assets/c4cc6e93-a9e2-4cd0-a003-d36cb6200ae7)
+
+# YOSYS AND SKY130 PDK
+
+1] Read_verilog 
+
+2] Read liberty 
+
+  ![verilog+liberty](https://github.com/user-attachments/assets/e1218a3b-9cf0-4953-b62d-adcf65ac6119)
+
+3] Hierarchy check
+  
+  ![hierarchy_check](https://github.com/user-attachments/assets/55fdeeb4-762f-4f61-9db0-5cc13473d092)
+
+4] show -
+
+        Create a graphviz DOT file for the selected part of the design and compile it to a graphics file (usually SVG or PostScript).
+
+        Before proc
+
+  ![before_proc yosys_show](https://github.com/user-attachments/assets/e5debd41-9c0b-45b4-a4d5-9482bf20e56c)
+
+---
+
+  ![before_proc_full_adder yosys_show](https://github.com/user-attachments/assets/043324e7-c9d4-4f74-9513-c5ad303d108b)
+
+---
+
+
+5] proc -
+
+        The command proc converts processes (Yosys’ internal repre- sentation of Verilog always- and initial-blocks) to circuits of multiplexers and storage elements (various types of flip-flops).
+
+  ![after_proc yosys_show](https://github.com/user-attachments/assets/7c16452e-9be5-4445-b4ff-1dc3fbc549dd)
+
+---
+
+  ![after_proc_full_adder yosys_show](https://github.com/user-attachments/assets/8d8c82b5-3aaf-4113-b6f9-bc23e5835503)
+
+---
+
+
+6] opt - 
+
+  ![after_proc_opt_RCA yosys_show](https://github.com/user-attachments/assets/9a83c962-c7de-4f0f-a9af-062a7ed79032)
+  
+  ![after_proc_opt_full_Adder yosys_show png yosys_show](https://github.com/user-attachments/assets/f035876e-0f22-4491-82f3-a845365bf5d4)
+
+
+7] techmap -
+
+        This pass implements a very simple technology mapper that replaces cells in the design with implementations
+
+      
+  ![after_techmap yosys_show](https://github.com/user-attachments/assets/3ca9f998-f9c7-43e8-ac49-f60a0478cab5)
+
+
+8]  abc -liberty /home/ajinkya/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+
+        This pass uses the ABC tool [1] for technology mapping of yosys’s internal gate library to a target architecture.
+
+  
+  ![after_abc_opt_RCA yosys_show](https://github.com/user-attachments/assets/612610c7-dda1-4c7a-90ad-53d1b724d867)
+
+---
+
+  ![after_abc_opt_Full_adder yosys_show](https://github.com/user-attachments/assets/954b8100-5f7e-45e7-b4d3-ce7c2059d5c3)
+
+---
+
+9] Stat check - 
+
+    Before Opt - 
+    
+  ![after_opt_stat](https://github.com/user-attachments/assets/22fce095-45df-4071-84fd-18d2ac3e5fa8)
+
+    After Opt - 
+
+  ![stats](https://github.com/user-attachments/assets/7735bba5-b317-4d63-be9e-3481e09c5fdb)
+
+---
+
+
+10] Write_verilog -attr2comment RCA_netlist.v
