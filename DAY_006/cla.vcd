@@ -1,0 +1,233 @@
+$date
+	Tue Jul  8 09:33:37 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_cla $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " carry $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$var integer 32 & i [31:0] $end
+$scope module uut $end
+$var wire 4 ' a [3:0] $end
+$var wire 4 ( b [3:0] $end
+$var wire 1 % cin $end
+$var wire 4 ) sum [3:0] $end
+$var wire 4 * cout [3:0] $end
+$var wire 1 " carry $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+bx *
+bx )
+bx (
+bx '
+b0 &
+x%
+bx $
+bx #
+x"
+bx !
+$end
+#10
+0"
+b10 *
+b0 !
+b0 )
+b1 &
+0%
+b10 $
+b10 (
+b110 #
+b110 '
+#20
+b111 *
+b1000 !
+b1000 )
+b10 &
+1%
+b101 $
+b101 (
+b10 #
+b10 '
+#30
+b0 *
+b11 !
+b11 )
+b11 &
+b0 $
+b0 (
+#40
+b1 *
+b1110 !
+b1110 )
+b100 &
+b1000 $
+b1000 (
+b101 #
+b101 '
+#50
+1"
+b1000 *
+b11 !
+b11 )
+b101 &
+b1010 #
+b1010 '
+#60
+0"
+b100 *
+b1000 !
+b1000 )
+b110 &
+0%
+b100 $
+b100 (
+b100 #
+b100 '
+#70
+b10 *
+b1100 !
+b1100 )
+b111 &
+b10 $
+b10 (
+b1010 #
+b1010 '
+#80
+1"
+b1000 *
+b10 !
+b10 )
+b1000 &
+b1010 $
+b1010 (
+b1000 #
+b1000 '
+#90
+0"
+b100 *
+b1001 !
+b1001 )
+b1001 &
+1%
+b100 $
+b100 (
+b100 #
+b100 '
+#100
+b0 *
+b100 !
+b100 )
+b1010 &
+0%
+b0 $
+b0 (
+#110
+b111 !
+b111 )
+b1011 &
+b101 $
+b101 (
+b10 #
+b10 '
+#120
+b1111 !
+b1111 )
+b1100 &
+b1001 $
+b1001 (
+b110 #
+b110 '
+#130
+b11 !
+b11 )
+b1101 &
+b0 $
+b0 (
+b11 #
+b11 '
+#140
+b111 *
+b1000 !
+b1000 )
+b1110 &
+b111 $
+b111 (
+b1 #
+b1 '
+#150
+b11 *
+b100 !
+b100 )
+b1111 &
+1%
+b11 $
+b11 (
+b0 #
+b0 '
+#160
+b100 *
+b1011 !
+b1011 )
+b10000 &
+b110 $
+b110 (
+b100 #
+b100 '
+#170
+b1 *
+b110 !
+b110 )
+b10001 &
+b1 $
+b1 (
+#180
+b0 *
+b1110 !
+b1110 )
+b10010 &
+0%
+b110 $
+b110 (
+b1000 #
+b1000 '
+#190
+b1011 !
+b1011 )
+b10011 &
+1%
+b10 $
+b10 (
+#200
+1"
+b1001 *
+b11 !
+b11 )
+b10100 &
+b1001 $
+b1001 (
+b1001 #
+b1001 '
+#210
+0"
+b100 *
+b1010 !
+b1010 )
+b10101 &
+0%
+b110 $
+b110 (
+b100 #
+b100 '
