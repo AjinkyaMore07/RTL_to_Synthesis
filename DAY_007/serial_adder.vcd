@@ -1,0 +1,414 @@
+$date
+	Thu Jul 10 13:29:20 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_top $end
+$var wire 4 ! sum [3:0] $end
+$var wire 1 " carry $end
+$var reg 1 # clk $end
+$var reg 4 $ in1 [3:0] $end
+$var reg 4 % in2 [3:0] $end
+$var reg 1 & load $end
+$var reg 1 ' reset $end
+$var integer 32 ( i [31:0] $end
+$scope module uut $end
+$var wire 1 " carry $end
+$var wire 1 # clk $end
+$var wire 4 ) in1 [3:0] $end
+$var wire 4 * in2 [3:0] $end
+$var wire 1 & load $end
+$var wire 1 ' reset $end
+$var wire 1 + w3 $end
+$var wire 1 , w2 $end
+$var wire 1 - w1 $end
+$var wire 4 . sum [3:0] $end
+$var wire 1 / FA_sum $end
+$var wire 1 0 FA_carry $end
+$scope module u1 $end
+$var wire 1 # clk $end
+$var wire 1 0 dffcarryin $end
+$var wire 4 1 in1 [3:0] $end
+$var wire 4 2 in2 [3:0] $end
+$var wire 1 & load $end
+$var wire 1 ' reset $end
+$var wire 1 / sumin $end
+$var wire 4 3 sumout [3:0] $end
+$var wire 1 , y2 $end
+$var wire 1 - y1 $end
+$var wire 1 + dffcarryout $end
+$var reg 4 4 sumout_temp [3:0] $end
+$var reg 1 + temp1 $end
+$var reg 4 5 tempA [3:0] $end
+$var reg 4 6 tempB [3:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 6
+b0 5
+b0 4
+b0 3
+bx 2
+bx 1
+00
+0/
+b0 .
+0-
+0,
+0+
+bx *
+bx )
+b0 (
+1'
+0&
+bx %
+bx $
+0#
+0"
+b0 !
+$end
+#5
+1#
+#10
+0#
+1&
+0'
+#15
+1/
+1-
+b100 6
+b1001 5
+b100 %
+b100 *
+b100 2
+b1001 $
+b1001 )
+b1001 1
+1#
+#20
+0#
+#25
+0/
+0-
+b1000 !
+b1000 .
+b1000 3
+b1000 4
+b10 6
+b100 5
+0&
+1#
+#30
+0#
+#35
+1/
+1,
+b1 6
+b10 5
+b100 !
+b100 .
+b100 3
+b100 4
+1#
+#40
+0#
+#45
+0,
+1-
+b1010 !
+b1010 .
+b1010 3
+b1010 4
+b0 6
+b1 5
+1#
+#50
+0#
+#55
+0/
+0-
+b0 5
+b1101 !
+b1101 .
+b1101 3
+b1101 4
+1#
+#60
+0#
+#65
+b0 !
+b0 .
+b0 3
+b0 4
+1#
+1'
+b1 (
+#70
+0#
+#75
+1"
+10
+1,
+1-
+b11 6
+b1 5
+b11 %
+b11 *
+b11 2
+b1 $
+b1 )
+b1 1
+1#
+1&
+0'
+#80
+0#
+#85
+0-
+1+
+b1 6
+b0 5
+0&
+1#
+#90
+0#
+#95
+1/
+0"
+00
+0,
+b0 6
+1#
+#100
+0#
+#105
+0/
+0+
+b1000 !
+b1000 .
+b1000 3
+b1000 4
+1#
+#110
+0#
+#115
+b100 !
+b100 .
+b100 3
+b100 4
+1#
+#120
+0#
+#125
+b0 !
+b0 .
+b0 3
+b0 4
+1#
+1'
+b10 (
+#130
+0#
+#135
+b1100 6
+b1000 5
+b1100 %
+b1100 *
+b1100 2
+b1000 $
+b1000 )
+b1000 1
+1#
+1&
+0'
+#140
+0#
+#145
+b110 6
+b100 5
+0&
+1#
+#150
+0#
+#155
+1/
+1,
+b11 6
+b10 5
+1#
+#160
+0#
+#165
+0/
+1"
+10
+1-
+b1000 !
+b1000 .
+b1000 3
+b1000 4
+b1 6
+b1 5
+1#
+#170
+0#
+#175
+0"
+00
+0,
+0-
+1/
+b0 6
+b0 5
+b100 !
+b100 .
+b100 3
+b100 4
+1+
+1#
+#180
+0#
+#185
+0/
+0+
+b0 !
+b0 .
+b0 3
+b0 4
+1#
+1'
+b11 (
+#190
+0#
+#195
+1"
+10
+1,
+1-
+b1 6
+b11 5
+b1 %
+b1 *
+b1 2
+b11 $
+b11 )
+b11 1
+1#
+1&
+0'
+#200
+0#
+#205
+0,
+1+
+b0 6
+b1 5
+0&
+1#
+#210
+0#
+#215
+1/
+0"
+00
+0-
+b0 5
+1#
+#220
+0#
+#225
+0/
+0+
+b1000 !
+b1000 .
+b1000 3
+b1000 4
+1#
+#230
+0#
+#235
+b100 !
+b100 .
+b100 3
+b100 4
+1#
+#240
+0#
+#245
+b0 !
+b0 .
+b0 3
+b0 4
+1#
+1'
+b100 (
+#250
+0#
+#255
+b1000 6
+b1000 5
+b1000 %
+b1000 *
+b1000 2
+b1000 $
+b1000 )
+b1000 1
+1#
+1&
+0'
+#260
+0#
+#265
+b100 6
+b100 5
+0&
+1#
+#270
+0#
+#275
+b10 6
+b10 5
+1#
+#280
+0#
+#285
+1"
+10
+1,
+1-
+b1 6
+b1 5
+1#
+#290
+0#
+#295
+0"
+00
+0,
+0-
+1/
+b0 6
+b0 5
+1+
+1#
+#300
+0#
+#305
+0/
+0+
+b1000 !
+b1000 .
+b1000 3
+b1000 4
+1#
+b101 (
