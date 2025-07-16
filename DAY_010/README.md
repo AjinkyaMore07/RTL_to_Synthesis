@@ -1,163 +1,78 @@
-7-Segment Display Decoder Overview
+# Parallel Adder in Verilog
 
-    Purpose:
-        The 7-segment display decoder drives a 7-segment display to show characters (digits or letters). It translates a binary or hexadecimal input into signals that light up specific segments of the display.
+## Overview
 
-    7-Segment Display:
-        Consists of 7 LEDs arranged in a figure-eight pattern, labeled a through g. By turning on specific combinations of these LEDs, different characters can be displayed.
+The `parallel_adder` module performs the addition of two 4-bit binary numbers with an additional carry-in. It outputs a 4-bit sum and a carry-out.
 
-    Decoder Inputs and Outputs:
-        2-Input Decoder: Drives characters from "0" to "3" (binary 00 to 11).
-        3-Input Decoder: Drives characters from "0" to "7" (binary 000 to 111).
-        4-Input Decoder: Drives characters from "0" to "F" (binary 0000 to 1111), including hex characters A, b, c or C, d, E, and F.
+## Files
 
-Typical 7-Segment Display Decoder Example
+- `Fa.v`: Verilog module for the Full Adder used in the Parallel Adder.
+- `parallel_adder.v`: Verilog module for the Parallel Adder.
+- `tb_parallel_adder.v`: Testbench for the Parallel Adder module.
 
-A common 7-segment display decoder is the 74LS47, which is a BCD to 7-segment latch/decoder/driver.
+## Module Description
 
-Inputs:
+### Full Adder (`Fa`)
 
-    BCD (Binary-Coded Decimal) inputs.
+#### Ports
 
-Outputs:
+- **Inputs**
+  - `a_in`: Input bit A
+  - `b_in`: Input bit B
+  - `c_in`: Carry-in bit
 
-    7 segments (a-g) that control the display.
+- **Outputs**
+  - `sum`: Sum of inputs A, B, and C
+  - `carry`: Carry-out of the addition
 
-Working:
+#### Functionality
 
-    Each input combination (from 0000 to 1111) activates specific segments to display the corresponding character.
-Advantages
+The Full Adder calculates the sum and carry-out for three single-bit binary inputs using XOR, AND, and OR operations.
 
-    Ease of Use:
-        Simple to understand and implement, especially for displaying numerical digits and some letters.
+### Parallel Adder (`parallel_adder`)
 
-    Low Cost:
-        Widely available and inexpensive, making them a cost-effective choice for many applications.
+#### Ports
 
-    Low Power Consumption:
-        Consumes relatively low power compared to more complex display technologies.
+- **Inputs**
+  - `a_in`: 4-bit input vector A
+  - `b_in`: 4-bit input vector B
+  - `c_in`: Carry-in bit
 
-    Readability:
-        Provides clear and easily readable numeric and alphanumeric information.
+- **Outputs**
+  - `sum`: 4-bit sum output
+  - `carry`: Carry-out of the addition
 
-    Direct Control:
-        Directly controls each segment of the display, simplifying the interface between the decoder and the display.
+#### Functionality
 
-    Versatility:
-        Can be used in a variety of devices and applications, from simple digital clocks to complex electronic displays.
-  Applications of 7-Segment Display Decoders
+The Parallel Adder uses four Full Adders in series to compute the sum and carry-out of two 4-bit binary numbers. The carry-out of each Full Adder is passed to the next Full Adder as its carry-in.
 
-    Digital Clocks:
-        Commonly used in digital clocks to display the current time. Each digit of the time is driven by a 7-segment display.
+## Testbench Description
 
-    Calculators:
-        Used in calculators to display numbers and basic operations. The simplicity and readability make them ideal for this purpose.
+The testbench (`tb_parallel_adder`) applies various input combinations to the `parallel_adder` module and displays the results. It covers different cases to verify the correctness of the addition.
 
-    Household Appliances:
-        Found in various household appliances like microwave ovens, washing machines, and ovens to display settings and status.
+### Test Cases
 
-    Electronic Meters:
-        Used in digital voltmeters, ammeters, and other measurement instruments to display numerical readings.
+1. **Inputs**: `a_in = 0000`, `b_in = 0000`, `c_in = 0`  
+   **Outputs**: `sum = 0000`, `carry = 0`
 
-    Scoreboards:
-        Utilized in sports scoreboards and other counting devices where numeric information needs to be displayed clearly.
+2. **Inputs**: `a_in = 0001`, `b_in = 0001`, `c_in = 0`  
+   **Outputs**: `sum = 0010`, `carry = 0`
 
-    Automotive Displays:
-        Applied in car dashboards to show information such as speed, fuel level, and other metrics.
+3. **Inputs**: `a_in = 0011`, `b_in = 0011`, `c_in = 0`  
+   **Outputs**: `sum = 0110`, `carry = 0`
 
-    Industrial Equipment:
-        Used in industrial equipment and machinery to display operational parameters and status.
+4. **Inputs**: `a_in = 0111`, `b_in = 0111`, `c_in = 0`  
+   **Outputs**: `sum = 1110`, `carry = 0`
 
-    Tachometers:
-        Employed in tachometers to show RPM (Revolutions Per Minute) in various machines and engines.
+5. **Inputs**: `a_in = 1111`, `b_in = 1111`, `c_in = 0`  
+   **Outputs**: `sum = 1110`, `carry = 1`
 
-    Temperature and Humidity Displays:
-        Applied in devices that display temperature and humidity readings in a digital format.
+6. **Inputs**: `a_in = 0101`, `b_in = 1010`, `c_in = 1`  
+   **Outputs**: `sum = 1111`, `carry = 0`
 
+7. **Inputs**: `a_in = 1110`, `b_in = 0001`, `c_in = 1`  
+   **Outputs**: `sum = 0000`, `carry = 1`
 
----
-# Verilog Code 
-
-    module Segment_Display_Decoder (
-        input [3:0] in,   
-        output reg [6:0] y );
-  
-            always @(*) begin
-                case (in)
-                    4'b0000: y = 7'b0111111; // 0
-                    4'b0001: y = 7'b0000110; // 1
-                    4'b0010: y = 7'b1011011; // 2
-                    4'b0011: y = 7'b1001111; // 3
-                    4'b0100: y = 7'b1100110; // 4
-                    4'b0101: y = 7'b1101101; // 5
-                    4'b0110: y = 7'b1111101; // 6
-                    4'b0111: y = 7'b0000111; // 7
-                    4'b1000: y = 7'b1111111; // 8
-                    4'b1001: y = 7'b1101111; // 9
-                    4'b1010: y = 7'b1110111; // A
-                    4'b1011: y = 7'b1111100; // b
-                    4'b1100: y = 7'b0111001; // C
-                    4'b1101: y = 7'b1011110; // d
-                    4'b1110: y = 7'b1111001; // E
-                    4'b1111: y = 7'b1110001; // F
-                    default: y = 7'b0111111; // Default to '0'
-                endcase
-            end
-    endmodule
-
-
----
-
-# TestBench 
-
-
-    module tb_Segment_Display_Decoder;
-      reg [3:0] in;       // 4-bit input
-      wire [6:0] y;       // 7-segment display output
-    
-      // Instantiate the Segment_Display_Decoder module
-      Segment_Display_Decoder uut (
-        .in(in),
-        .y(y)
-      );
-    
-      // Initialize and apply test vectors
-      initial begin
-        // Display all 16 possible 4-bit values
-        in = 4'b0000; #10; // Display 0
-        in = 4'b0001; #10; // Display 1
-        in = 4'b0010; #10; // Display 2
-        in = 4'b0011; #10; // Display 3
-        in = 4'b0100; #10; // Display 4
-        in = 4'b0101; #10; // Display 5
-        in = 4'b0110; #10; // Display 6
-        in = 4'b0111; #10; // Display 7
-        in = 4'b1000; #10; // Display 8
-        in = 4'b1001; #10; // Display 9
-        in = 4'b1010; #10; // Display A
-        in = 4'b1011; #10; // Display b
-        in = 4'b1100; #10; // Display C
-        in = 4'b1101; #10; // Display d
-        in = 4'b1110; #10; // Display E
-        in = 4'b1111; #10; // Display F
-        $finish; // End simulation
-      end
-    
-      // Dump waveform data for viewing
-      initial begin
-        $dumpfile("segment_display.vcd");
-        $dumpvars(0, tb_Segment_Display_Decoder);
-      end
-    endmodule
-
----
-
-# VCD Output
-
-
-# GTKWAVE Output
-
-
-
-# Yosys and SKY130 
+8. **Inputs**: `a_in = 1010`, `b_in = 0101`, `c_in = 1`  
+   **Outputs**: `sum = 0000`, `carry = 1`
 
