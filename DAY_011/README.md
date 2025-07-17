@@ -103,3 +103,58 @@
 # ⚠️ Important Note
 
     These are basic encoders, not priority encoders. If more than one input is HIGH at the same time, the result may be unpredictable or default.
+
+---
+
+# VCD Output
+
+<img width="530" height="125" alt="encoder_vcd" src="https://github.com/user-attachments/assets/95a4ab3e-7305-4f22-8b1c-f205fce5dc95" />
+
+---
+
+
+# GTKWAVE Output
+
+<img width="1910" height="741" alt="gtkwave" src="https://github.com/user-attachments/assets/49aba867-922e-43c9-ad31-e3a25bc57cb8" />
+
+---
+
+# Yosys & SKY130
+
+1] read_verilog 
+2] read_liberty
+3] hierarchy
+
+<img width="952" height="386" alt="read_Verilog_liberty" src="https://github.com/user-attachments/assets/d29e5803-6f42-4d49-aa2b-fab6b31a6df5" /> 
+
+4] show - 
+
+<img width="460" height="92" alt="before_proc yosys_show" src="https://github.com/user-attachments/assets/aec5a4c4-2e96-4e38-949d-ec36f8e1fc9e" />
+
+
+5] proc - 
+
+<img width="1299" height="371" alt="proc yosys_show" src="https://github.com/user-attachments/assets/a8408be6-80de-4736-8061-9f113c81ec17" />
+
+6] opt 
+
+<img width="873" height="371" alt="after_proc_opt yosys_show" src="https://github.com/user-attachments/assets/ba1c6a18-63f5-4177-bf1e-f9a68c0e899a" />
+
+7] techmap 
+
+<img width="4804" height="1921" alt="techmap yosys_show" src="https://github.com/user-attachments/assets/75460ddc-9788-4bea-86f5-e39635ce3fa6" />
+
+8] opt 
+
+<img width="3858" height="751" alt="after_techmap_opt yosys_show" src="https://github.com/user-attachments/assets/79300036-808c-4ca2-86e5-209f4c342451" />
+
+9] abc opt
+
+<img width="1357" height="897" alt="abc_opt yosys_show" src="https://github.com/user-attachments/assets/89ba17f2-dff6-4bd9-bc5c-643922bab436" />
+
+10] stat
+
+<img width="529" height="306" alt="stat" src="https://github.com/user-attachments/assets/9650d525-1fc9-4d84-8ba5-7944f2d3fd3b" />
+
+
+11] write_verilog -attr2comment encoder_netlist.v
