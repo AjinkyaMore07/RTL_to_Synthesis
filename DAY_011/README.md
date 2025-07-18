@@ -156,5 +156,5 @@
 
 <img width="529" height="306" alt="stat" src="https://github.com/user-attachments/assets/9650d525-1fc9-4d84-8ba5-7944f2d3fd3b" />
 
-
+ 
 11] write_verilog -attr2comment encoder_netlist.v
