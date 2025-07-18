@@ -1,4 +1,4 @@
-<img width="682" height="293" alt="Screenshot from 2025-07-15 21-48-54" src="https://github.com/user-attachments/assets/b0ab945e-b714-473d-b658-02b3fd8df47a" /># ✅ What is a Priority Encoder?
+# ✅ What is a Priority Encoder?
 
 A priority encoder is a combinational logic circuit that takes multiple binary inputs and encodes them into a smaller number of output bits, giving priority to the highest-order active input (i.e., the most significant input with logic '1').
 
