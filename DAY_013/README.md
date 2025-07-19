@@ -1,78 +1,152 @@
-# Parallel Adder in Verilog
+# Decimal to BCD Converter (Verilog)
 
-## Overview
+## 📘 Overview
 
-The `parallel_adder` module performs the addition of two 4-bit binary numbers with an additional carry-in. It outputs a 4-bit sum and a carry-out.
+        The module takes a one-hot encoded 10-bit input representing decimal digits 0 through 9 and produces a corresponding 4-bit BCD output.
 
-## Files
+## 🔢 What is BCD?
+        Binary-Coded Decimal (BCD) is a class of binary encodings for decimal numbers where each digit is represented by its own binary sequence. In standard BCD (also called 8421 BCD), each decimal digit (0–9) is represented by a 4-bit binary number:
 
-- `Fa.v`: Verilog module for the Full Adder used in the Parallel Adder.
-- `parallel_adder.v`: Verilog module for the Parallel Adder.
-- `tb_parallel_adder.v`: Testbench for the Parallel Adder module.
 
-## Module Description
+        | Decimal | BCD (4-bit) |
 
-### Full Adder (`Fa`)
+        | ------- | ----------- |
 
-#### Ports
+        | 0       | 0000        |
+        
+        | 1       | 0001        |
 
-- **Inputs**
-  - `a_in`: Input bit A
-  - `b_in`: Input bit B
-  - `c_in`: Carry-in bit
+        | 2       | 0010        |
 
-- **Outputs**
-  - `sum`: Sum of inputs A, B, and C
-  - `carry`: Carry-out of the addition
+        | 3       | 0011        |
 
-#### Functionality
+        | 4       | 0100        |
 
-The Full Adder calculates the sum and carry-out for three single-bit binary inputs using XOR, AND, and OR operations.
+        | 5       | 0101        |
 
-### Parallel Adder (`parallel_adder`)
+        | 6       | 0110        |
 
-#### Ports
+        | 7       | 0111        |
 
-- **Inputs**
-  - `a_in`: 4-bit input vector A
-  - `b_in`: 4-bit input vector B
-  - `c_in`: Carry-in bit
+        | 8       | 1000        |
 
-- **Outputs**
-  - `sum`: 4-bit sum output
-  - `carry`: Carry-out of the addition
+        | 9       | 1001        |
 
-#### Functionality
 
-The Parallel Adder uses four Full Adders in series to compute the sum and carry-out of two 4-bit binary numbers. The carry-out of each Full Adder is passed to the next Full Adder as its carry-in.
+---
 
-## Testbench Description
 
-The testbench (`tb_parallel_adder`) applies various input combinations to the `parallel_adder` module and displays the results. It covers different cases to verify the correctness of the addition.
 
-### Test Cases
+## 📁 File: bcd.v
+        The module converts a 10-bit one-hot encoded input (only one bit is high representing a decimal digit) to a 4-bit   BCD output.
 
-1. **Inputs**: `a_in = 0000`, `b_in = 0000`, `c_in = 0`  
-   **Outputs**: `sum = 0000`, `carry = 0`
 
-2. **Inputs**: `a_in = 0001`, `b_in = 0001`, `c_in = 0`  
-   **Outputs**: `sum = 0010`, `carry = 0`
+        | Port Name | Direction | Width  | Description                               |
+        
+        | --------- | --------- | ------ | ----------------------------------------- |
 
-3. **Inputs**: `a_in = 0011`, `b_in = 0011`, `c_in = 0`  
-   **Outputs**: `sum = 0110`, `carry = 0`
+        | `in`      | Input     | \[9:0] | One-hot encoded input (only one bit high) |
 
-4. **Inputs**: `a_in = 0111`, `b_in = 0111`, `c_in = 0`  
-   **Outputs**: `sum = 1110`, `carry = 0`
+        | `en`      | Input     | 1 bit  | Enable signal (active high)               |
+        
+        | `y`       | Output    | \[3:0] | 4-bit BCD output representing the digit   |
 
-5. **Inputs**: `a_in = 1111`, `b_in = 1111`, `c_in = 0`  
-   **Outputs**: `sum = 1110`, `carry = 1`
 
-6. **Inputs**: `a_in = 0101`, `b_in = 1010`, `c_in = 1`  
-   **Outputs**: `sum = 1111`, `carry = 0`
+---
 
-7. **Inputs**: `a_in = 1110`, `b_in = 0001`, `c_in = 1`  
-   **Outputs**: `sum = 0000`, `carry = 1`
 
-8. **Inputs**: `a_in = 1010`, `b_in = 0101`, `c_in = 1`  
-   **Outputs**: `sum = 0000`, `carry = 1`
+
+## ⚙️ Functionality
+
+        When en is high:
+
+        The 10-bit input in is checked using a case statement.
+
+        The corresponding BCD output is assigned to y.
+
+        For example, if in = 10'b0000001000 (decimal 3), y = 4'd3 → 0011.
+
+        If en is low or if the input does not match any valid one-hot encoding, the output y is set to 0000.
+
+
+
+---
+
+## 📌 Notes
+
+        Input must be one-hot encoded — only one bit should be high at a time.
+
+        If multiple or no bits are high, the output defaults to 0000.
+
+        This is a basic decoder and not a general-purpose decimal-to-BCD converter for larger numbers.
+
+
+---
+
+
+# Verilog Code
+
+
+           module bcd(in,en,y);
+            input [9:0]in;
+            input en;
+            output reg [3:0]y;
+
+            always @(*)
+             begin
+              if(en)
+                begin
+                  case(in)
+        10'b0000000001 : y = 4'd0;
+        10'b0000000010 : y = 4'd1;
+        10'b0000000100 : y = 4'd2;
+        10'b0000001000 : y = 4'd3;
+        10'b0000010000 : y = 4'd4;
+        10'b0000100000 : y = 4'd5;
+        10'b0001000000 : y = 4'd6;
+        10'b0010000000 : y = 4'd7     
+        10'b0100000000 : y = 4'd8;
+        10'b1000000000 : y = 4'd9;
+        default : y = 4'b0000;
+        endcase
+        end
+        else
+        y = 4'b0000;
+        end
+
+        endmodule
+
+
+---
+
+# Testbench
+
+        module tb();
+        reg [9:0] in;
+        reg en;
+        wire [3:0]y;
+
+        bcd dut(in,en,y);
+
+        integer i;
+
+        initial begin
+         for(i = 0 ;i < 10 ;i = i + 1)
+          begin
+            en = 1'b1;
+            in[i]= 1'b1;
+            #10;
+            in = 10'b0;
+          end
+         $finish;
+        end
+
+        initial begin
+         $monitor("Time = %0t , in = %0d , en = %0d , y = %0d",$time,in,en,y);
+         $dumpfile("decimal_bcd.vcd");
+         $dumpvars(0,tb);
+        end
+        endmodule
+
+---
 
