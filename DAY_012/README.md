@@ -1,4 +1,4 @@
-<img width="3195" height="707" alt="after_techmap_opt yosys_show" src="https://github.com/user-attachments/assets/7c2461b4-72b7-475d-9815-73769792cee5" /># ✅ What is a Priority Encoder?
+# ✅ What is a Priority Encoder?
 
 A priority encoder is a combinational logic circuit that takes multiple binary inputs and encodes them into a smaller number of output bits, giving priority to the highest-order active input (i.e., the most significant input with logic '1').
 
@@ -144,8 +144,11 @@ It ensures that only the highest-priority input is considered when multiple inpu
 # YOSYS and SKY130 
 
 1] Read Verilog file 
+
 2] Read Liberty file 
+
 3] check Hierarchy
+
 
 4] show -
             
