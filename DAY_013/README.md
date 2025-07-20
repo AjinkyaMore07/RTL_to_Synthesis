@@ -150,3 +150,83 @@
 
 ---
 
+# VCD OUTPUT
+
+   <img width="717" height="228" alt="vcd" src="https://github.com/user-attachments/assets/379f5815-d8c6-46b0-8f35-843a1bb24d9b" />
+
+
+# GTKWAVE
+
+   <img width="1918" height="545" alt="gtkwave" src="https://github.com/user-attachments/assets/75fcb29f-cce4-4d33-a420-7d521eecfa56" />
+
+
+
+# Yosys and Sky130 PDKs
+
+1] Read Verilog file 
+2] Read Liberty file 
+3] check Hierarchy
+
+  <img width="967" height="396" alt="verilog+liberty" src="https://github.com/user-attachments/assets/99545d37-8fc7-4e64-b6f2-291dfe85d262" />
+
+  
+4] 4] show -
+            
+            Create a graphviz DOT file for the selected part of the design and compile it to a graphics file (usually SVG or PostScript).
+
+            Before proc
+
+    
+5] proc - 
+            
+            The command proc converts processes (Yosys’ internal repre- sentation of Verilog always- and initial-blocks) to circuits of multiplexers and storage elements (various types of flip-flops).
+    
+  <img width="2451" height="806" alt="proc yosys_show" src="https://github.com/user-attachments/assets/c0fa7d3e-9fff-40f8-bc75-09b92c173c17" />
+
+
+
+6] opt - 
+
+ <img width="1671" height="806" alt="proc_opt yosys_show" src="https://github.com/user-attachments/assets/49439ead-5a57-46f0-aa33-d4b03ca2feeb" />
+
+
+
+6] techmap -
+
+            This pass implements a very simple technology mapper that replaces cells in the design with implementations given in form of a Verilog or RTLIL source file.
+
+ <img width="8012" height="13361" alt="techmap yosys_show" src="https://github.com/user-attachments/assets/f0ceb048-8ecc-4e14-a6a0-a7510b7c5240" />
+
+ 
+
+
+7] opt - 
+
+            This pass calls all the other opt_* passes in a useful order. This performs a series of trivial optimizations and cleanups. This pass executes the other passes in the following order:
+
+  <img width="7979" height="2386" alt="techmap opt yosys_show" src="https://github.com/user-attachments/assets/60889836-a036-4b0b-a8bc-8f7d09e9a4c3" />
+
+
+  
+     
+8]  abc -liberty /home/ajinkya/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+
+            This pass uses the ABC tool [1] for technology mapping of yosys’s internal gate library to a target architecture.
+
+   <img width="2996" height="3457" alt="abc yosys_show" src="https://github.com/user-attachments/assets/62bfb3a7-3a10-42bd-ad7a-84de02514610" />
+
+
+
+9] opt 
+
+  <img width="2695" height="2896" alt="abc_opt yosys_show" src="https://github.com/user-attachments/assets/ef7581a8-6df1-4b3b-b731-0db11b037307" />
+
+
+
+10] stat - 
+
+   <img width="572" height="519" alt="stat" src="https://github.com/user-attachments/assets/7bca5b07-4530-4fcf-b72e-069d1061faaa" />
+ 
+11] write_verilog -attr2comment Full_adder_netlist.v
+
+
