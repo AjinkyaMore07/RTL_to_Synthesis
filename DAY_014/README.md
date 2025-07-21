@@ -1,142 +1,78 @@
+# Parallel Adder in Verilog
 
-# Verilog Code
+## Overview
 
+The `parallel_adder` module performs the addition of two 4-bit binary numbers with an additional carry-in. It outputs a 4-bit sum and a carry-out.
 
-    module b2g(binary,gray);
-    input [3:0] binary;
-    output [3:0]gray;
-    
-    assign gray[3] = binary[3];   //// MSB remains the same
-    assign gray[2] = binary[3] ^ binary[2]; // G2 = B3 XOR B2
-    assign gray[1] = binary[2] ^ binary[1]; // G1 = B3 XOR B1
-    assign gray[0] = binary[1] ^ binary[0];	// G0 = B3 XOR B0
-    endmodule
+## Files
 
+- `Fa.v`: Verilog module for the Full Adder used in the Parallel Adder.
+- `parallel_adder.v`: Verilog module for the Parallel Adder.
+- `tb_parallel_adder.v`: Testbench for the Parallel Adder module.
 
----
+## Module Description
 
-# Testbench
+### Full Adder (`Fa`)
 
-    module tb();
-    reg [3:0] binary;
-    wire [3:0] gray;
-    
-    b2g dut(binary,gray);
-    
-    
-    integer i;
-    initial begin
-     for(i=0 ; i<15 ; i=i+1)
-      begin
-        binary = i;
-        #10;
-      end
-    end
-    
-    initial begin
-     $monitor("Time = %0t , binary = %0d , gray = %0d ",$time,binary,gray);
-     $dumpfile("b2g.vcd");
-     $dumpvars(0,tb);
-    end
-    endmodule
+#### Ports
 
----
+- **Inputs**
+  - `a_in`: Input bit A
+  - `b_in`: Input bit B
+  - `c_in`: Carry-in bit
 
-# VCD OUTPUT
+- **Outputs**
+  - `sum`: Sum of inputs A, B, and C
+  - `carry`: Carry-out of the addition
 
-  <img width="554" height="281" alt="vcd" src="https://github.com/user-attachments/assets/c4d7a7a2-bb46-4d22-998b-433b36977cf2" />
- 
-# GTKWAVE
-  
-  <img width="1919" height="654" alt="gtkwave" src="https://github.com/user-attachments/assets/8075febe-5c1c-4652-8c04-1e7bbb4c32ea" />
+#### Functionality
 
-   
-# Yosys and Sky130 PDKs
+The Full Adder calculates the sum and carry-out for three single-bit binary inputs using XOR, AND, and OR operations.
 
-1] Read Verilog file 
-2] Read Liberty file 
-3] check Hierarchy
+### Parallel Adder (`parallel_adder`)
 
-   <img width="760" height="403" alt="read_Verilog+liberty" src="https://github.com/user-attachments/assets/b9437915-f149-4bc2-9038-5c19c80168b4" />
+#### Ports
 
-  
-4] 4] show -
-            
-            Create a graphviz DOT file for the selected part of the design and compile it to a graphics file (usually SVG or PostScript).
+- **Inputs**
+  - `a_in`: 4-bit input vector A
+  - `b_in`: 4-bit input vector B
+  - `c_in`: Carry-in bit
 
-            Before proc
+- **Outputs**
+  - `sum`: 4-bit sum output
+  - `carry`: Carry-out of the addition
 
-    
-5] proc - 
-            
-            The command proc converts processes (Yosys’ internal repre- sentation of Verilog always- and initial-blocks) to circuits of multiplexers and storage elements (various types of flip-flops).
-    
- 
-   <img width="747" height="531" alt="proc yosys_show" src="https://github.com/user-attachments/assets/ba70a2a3-478a-4efa-8de6-32415042dc06" />
+#### Functionality
 
+The Parallel Adder uses four Full Adders in series to compute the sum and carry-out of two 4-bit binary numbers. The carry-out of each Full Adder is passed to the next Full Adder as its carry-in.
 
-6] opt - 
+## Testbench Description
 
-   <img width="747" height="531" alt="proc_opt yosys_show" src="https://github.com/user-attachments/assets/e4841b9c-4ac7-4712-aabf-d56caf3f4a3c" />
+The testbench (`tb_parallel_adder`) applies various input combinations to the `parallel_adder` module and displays the results. It covers different cases to verify the correctness of the addition.
 
-   
-6] techmap -
+### Test Cases
 
-            This pass implements a very simple technology mapper that replaces cells in the design with implementations given in form of a Verilog or RTLIL source file.
+1. **Inputs**: `a_in = 0000`, `b_in = 0000`, `c_in = 0`  
+   **Outputs**: `sum = 0000`, `carry = 0`
 
-  
-  <img width="776" height="531" alt="techmap yosys_show" src="https://github.com/user-attachments/assets/71c1dac3-fe08-4133-8d95-b7ce0aefca61" />
+2. **Inputs**: `a_in = 0001`, `b_in = 0001`, `c_in = 0`  
+   **Outputs**: `sum = 0010`, `carry = 0`
 
+3. **Inputs**: `a_in = 0011`, `b_in = 0011`, `c_in = 0`  
+   **Outputs**: `sum = 0110`, `carry = 0`
 
-7] opt - 
+4. **Inputs**: `a_in = 0111`, `b_in = 0111`, `c_in = 0`  
+   **Outputs**: `sum = 1110`, `carry = 0`
 
-            This pass calls all the other opt_* passes in a useful order. This performs a series of trivial optimizations and cleanups. This pass executes the other passes in the following order:
-    
-  <img width="776" height="531" alt="techmap_opt yosys_show" src="https://github.com/user-attachments/assets/41f9849e-5d5c-4f00-9b45-df139aefc3c1" />
+5. **Inputs**: `a_in = 1111`, `b_in = 1111`, `c_in = 0`  
+   **Outputs**: `sum = 1110`, `carry = 1`
 
-     
-8]  abc -liberty /home/ajinkya/lib/sky130_fd_sc_hd__tt_025C_1v80.lib 
+6. **Inputs**: `a_in = 0101`, `b_in = 1010`, `c_in = 1`  
+   **Outputs**: `sum = 1111`, `carry = 0`
 
-            This pass uses the ABC tool [1] for technology mapping of yosys’s internal gate library to a target architecture.
+7. **Inputs**: `a_in = 1110`, `b_in = 0001`, `c_in = 1`  
+   **Outputs**: `sum = 0000`, `carry = 1`
 
-  <img width="1092" height="363" alt="abc yosys_show" src="https://github.com/user-attachments/assets/e022d41b-c4f6-42de-b739-3ef341a421e6" />
+8. **Inputs**: `a_in = 1010`, `b_in = 0101`, `c_in = 1`  
+   **Outputs**: `sum = 0000`, `carry = 1`
 
-9] opt 
-
-  <img width="944" height="531" alt="abc_opt yosys_show" src="https://github.com/user-attachments/assets/67c40830-d8fc-4672-9d80-403da01adbd4" />
-
-10] stat - 
-  
-  <img width="633" height="318" alt="stat" src="https://github.com/user-attachments/assets/c915c6b8-2196-4916-a230-eb1c9424fd82" />
-  
- 
-11] write_verilog -attr2comment Full_adder_netlist.v
-
-    /* Generated by Yosys 0.33 (git sha1 2584903a060) */
-    
-    /* top =  1  */
-    /* src = "b2g_converter.v:1.1-9.10" */
-    module b2g(binary, gray);
-      /* src = "b2g_converter.v:2.13-2.19" */
-      input [3:0] binary;
-      wire [3:0] binary;
-      /* src = "b2g_converter.v:3.13-3.17" */
-      output [3:0] gray;
-      wire [3:0] gray;
-      sky130_fd_sc_hd__xor2_1 _0_ (
-        .A(binary[3]),
-        .B(binary[2]),
-        .X(gray[2])
-      );
-      sky130_fd_sc_hd__xor2_1 _1_ (
-        .A(binary[2]),
-        .B(binary[1]),
-        .X(gray[1])
-      );
-      sky130_fd_sc_hd__xor2_1 _2_ (
-        .A(binary[1]),
-        .B(binary[0]),
-        .X(gray[0])
-      );
-      assign gray[3] = binary[3];
-    endmodule
