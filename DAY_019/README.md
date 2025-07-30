@@ -1,3 +1,107 @@
+# 📌 Introduction
+
+    The dff_async_reset_sync_reset module describes a D-type flip-flop that supports both asynchronous reset and synchronous reset functionality.
+
+    Asynchronous Reset: Immediately forces the output q to 0 whenever the reset signal is active, regardless of the clock.
+
+    Synchronous Reset: Forces the output q to 0, but only on the rising edge of the clock.
+
+    Normal Operation: When neither reset is active, the flip-flop captures the input in at each rising clock edge.
+
+## 📌 Module Declaration
+
+        module dff_async_reset_sync_reset(
+            input  in,            // Data input
+            input  clk,           // Clock input
+            input  async_reset,   // Asynchronous reset
+            input  sync_reset,    // Synchronous reset
+            output reg q          // Data output
+        );
+        
+
+---
+
+
+## 📌 Inputs Required
+
+    clk (Clock)
+
+        Type: Signal (rising edge triggered)
+
+        Function: Governs when the data input is sampled and transferred to output.
+
+    in (Data Input)
+
+        Type: Single-bit input
+
+        Function: The data value to be stored in the flip-flop.
+
+    async_reset (Asynchronous Reset)
+
+        Type: Active-high control input
+
+        Function: Immediately resets the flip-flop output q to 0 regardless of the clock.
+
+    sync_reset (Synchronous Reset)
+
+        Type: Active-high control input
+
+        Function: Resets the flip-flop output q to 0, but only on the rising edge of the clock.
+
+
+---
+
+## 📌 Truth Table
+
+| Clock Edge | Async Reset | Sync Reset | `in` | `q` (next state) |
+
+| ---------- | ----------- | ---------- | ---- | ---------------- |
+
+| Rising     | 0           | 0          | 0/1  | in               |
+
+| Rising     | 0           | 1          | X    | 0                |
+
+| Any        | 1           | X          | X    | 0                |
+
+| Falling/No | 0           | X          | X    | q (hold)         |
+
+
+---
+
+## 📌 Applications
+
+    1] ASIC and FPGA Reset Schemes
+
+        Ensures a reliable startup with asynchronous reset, while maintaining synchronous reset for controlled operation.
+
+    2] Clock Domain Crossing (CDC) Designs
+
+        Asynchronous reset helps initialize registers across domains, while synchronous reset prevents metastability in normal operation.
+
+    3] Low-Power and Safety-Critical Systems
+
+        Used where both a quick reset (e.g., power-up) and controlled reset (e.g., error recovery) are needed.
+
+    4] Test and Debug
+
+        Provides flexibility in simulation and hardware debugging by supporting two kinds of reset strategies.
+
+    5] SoC Power-Up Initialization
+
+        Guarantees registers come to a known state immediately after power-on (via async reset).
+
+---
+
+## 📌 Advantages
+
+    Combines fast initialization (async) with glitch-free controlled reset (sync).
+
+    Flexible for various system-level requirements.
+
+    Helps avoid indeterminate states during power-up and runtime resets.
+
+---
+
 ## Verilog code 
 
     module dff_async_reset_sync_reset(
